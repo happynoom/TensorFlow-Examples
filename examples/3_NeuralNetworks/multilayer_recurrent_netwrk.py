@@ -63,10 +63,13 @@ def RNN(x, weights, biases):
     # Define a lstm cell with tensorflow
     lstm_cell_1 = rnn_cell.BasicLSTMCell(n_hidden * 2, forget_bias=1.0)
     lstm_cell_2 = rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    cells = rnn_cell.MultiRNNCell([lstm_cell_1, lstm_cell_2])
+
     # Define dropout to avoid overfitting
-    dropout_cell_1 = DropoutWrapper(lstm_cell_1, input_keep_prob=0.5, output_keep_prob=0.5)
-    dropout_cell_2 = DropoutWrapper(lstm_cell_2, input_keep_prob=0.5, output_keep_prob=0.5)
-    cells = rnn_cell.MultiRNNCell([dropout_cell_1, dropout_cell_2])
+    # dropout_cell_1 = DropoutWrapper(lstm_cell_1, input_keep_prob=0.5, output_keep_prob=0.5)
+    # dropout_cell_2 = DropoutWrapper(lstm_cell_2, input_keep_prob=0.5, output_keep_prob=0.5)
+    # cells = rnn_cell.MultiRNNCell([dropout_cell_1, dropout_cell_2])
+
     # Get lstm cell output
     outputs, states = rnn.rnn(cells, x, dtype=tf.float32)
 
