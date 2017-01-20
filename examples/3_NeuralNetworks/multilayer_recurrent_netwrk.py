@@ -25,7 +25,7 @@ handle 28 sequences of 28 steps for every sample.
 
 # Parameters
 learning_rate = 0.001
-training_iters = 100000
+training_iters = 200000
 batch_size = 128
 display_step = 10
 
@@ -61,7 +61,7 @@ def RNN(x, weights, biases):
     x = tf.split(0, n_steps, x)
 
     # Define a lstm cell with tensorflow
-    lstm_cell_1 = rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    lstm_cell_1 = rnn_cell.BasicLSTMCell(n_hidden * 2, forget_bias=1.0)
     lstm_cell_2 = rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
     # Define dropout to avoid overfitting
     dropout_cell_1 = DropoutWrapper(lstm_cell_1, input_keep_prob=0.5, output_keep_prob=0.5)
